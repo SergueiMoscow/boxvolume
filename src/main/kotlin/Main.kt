@@ -4,10 +4,12 @@ class Box(){
     var side3:Double = 0.0
     var isOk:Boolean = false
 
+    // ================================================== //
     fun calcVolume(): Double {
         return side1 * side2 * side3
     }
 
+    // ================================================== //
     fun checkIfDouble(stringToCheck: String):Double{
         val retValue = stringToCheck.toDoubleOrNull()
         if (retValue != null && retValue > 0.0) {
@@ -17,21 +19,21 @@ class Box(){
         }
         return 0.0
     }
+
+    // ================================================== //
     fun input(){
-        for (i in 0..2)
-            println(i)
-        println("Введите длину или сразу 3 значения (длину, ширину и высоту), разделённые пробелом")
+        println("Type the length or 3 values at once (length, width and height), separated by a space")
         var inputString: String = readln()
         var userInputArray = inputString.split(" ").toTypedArray()
         when (userInputArray.size){
             1 -> {
                 if (this.checkIfDouble(userInputArray[0])>0.0) {
                     this.side1 = this.checkIfDouble(userInputArray[0])
-                    println("Side 1 is ${this.side1}. Please, input size 2")
+                    println("Side 1 is ${this.side1}. Please, type side 2")
                     inputString = readln()
                     if (this.checkIfDouble(inputString)>0.0) {
                         this.side2 = this.checkIfDouble(inputString)
-                        println("Side 1 is ${this.side1}, side 2 is ${this.side2}. Pleade, input side 3")
+                        println("Side 1 is ${this.side1}, side 2 is ${this.side2}. Pleade, type side 3")
                         inputString = readln()
                         if (this.checkIfDouble(inputString) > 0.0) {
                             this.side3 = this.checkIfDouble(inputString)
@@ -57,12 +59,14 @@ class Box(){
         }
     }
 
+    // ================================================== //
     fun checkIsOk() :Boolean{
         this.isOk=(this.side1 > 0.0 && this.side2 > 0.0 && this.side3 > 0.0)
         return this.isOk
     }
 }
 
+// ================================================== //
 fun main(args: Array<String>) {
     val boxObj =  Box()
     var counter = 0
@@ -75,12 +79,11 @@ fun main(args: Array<String>) {
         }
         boxObj.checkIsOk()
     } else {
-
         boxObj.input()
     }
     if (boxObj.isOk) {
-      print("The box volume is "+boxObj.calcVolume())
+      println("The box volume is "+boxObj.calcVolume())
     } else {
-        "Someghing wrong with the parameters"
+        println("Something wrong with the parameters")
     }
 }
